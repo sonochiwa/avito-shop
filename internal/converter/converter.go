@@ -2,10 +2,10 @@ package converter
 
 import (
 	"github.com/sonochiwa/avito-shop/api/rest/models"
-	"github.com/sonochiwa/avito-shop/internal/domain"
+	models2 "github.com/sonochiwa/avito-shop/internal/domain"
 )
 
-func ConvertGetInfoToResponse(info domain.GetInfo) models.GetInfoHandlerResponse {
+func ConvertGetInfoToResponse(info models2.GetInfo) models.GetInfoHandlerResponse {
 	inventory := make([]models.InventoryItem, len(info.Inventory))
 	for i, item := range info.Inventory {
 		inventory[i] = models.InventoryItem{
