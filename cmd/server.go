@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/sonochiwa/avito-shop/internal/database"
@@ -17,12 +18,14 @@ func Run() {
 	serviceInstance := service.New(repositoryInstance)
 	handlerInstance := handler.New(serviceInstance)
 
-	handlerInstance.NewRouter()
-
 	srv := http.Server{
 		Addr:    ":8080",
 		Handler: handlerInstance.NewRouter(),
 	}
 
-	srv.ListenAndServe()
+	log.Print("starting server...")
+	err := srv.ListenAndServe()
+	if err != nil {
+		log.Fatalf("error when starting server: %v", err)
+	}
 }
