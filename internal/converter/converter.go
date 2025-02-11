@@ -6,31 +6,31 @@ import (
 )
 
 func ConvertGetInfoToResponse(info domain.GetInfo) rest.GetInfoHandlerResponse {
-	inventory := make([]rest.InventoryItem, 0, len(info.Inventory))
-	for _, item := range info.Inventory {
-		inventory = append(inventory, rest.InventoryItem{
+	inventory := make([]rest.InventoryItem, len(info.Inventory))
+	for i, item := range info.Inventory {
+		inventory[i] = rest.InventoryItem{
 			Type:     item.ProductTitle,
 			Quantity: item.Quantity,
-		})
+		}
 	}
 
 	coinHistory := rest.CoinHistory{
-		Received: make([]rest.ReceivedItem, 0, len(info.Ledger.Received)),
-		Sent:     make([]rest.SentItem, 0, len(info.Ledger.Sent)),
+		Received: make([]rest.ReceivedItem, len(info.Ledger.Received)),
+		Sent:     make([]rest.SentItem, len(info.Ledger.Sent)),
 	}
 
-	for _, received := range info.Ledger.Received {
-		coinHistory.Received = append(coinHistory.Received, rest.ReceivedItem{
+	for i, received := range info.Ledger.Received {
+		coinHistory.Received[i] = rest.ReceivedItem{
 			FromUser: received.FromUser,
 			Amount:   received.Amount,
-		})
+		}
 	}
 
-	for _, sent := range info.Ledger.Sent {
-		coinHistory.Sent = append(coinHistory.Sent, rest.SentItem{
+	for i, sent := range info.Ledger.Sent {
+		coinHistory.Sent[i] = rest.SentItem{
 			ToUser: sent.ToUser,
 			Amount: sent.Amount,
-		})
+		}
 	}
 
 	return rest.GetInfoHandlerResponse{
