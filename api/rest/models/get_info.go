@@ -1,4 +1,4 @@
-package rest
+package models
 
 type GetInfoHandlerResponse struct {
 	Coins       int             `json:"coins"`

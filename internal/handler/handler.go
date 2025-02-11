@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/sonochiwa/avito-shop/api/rest"
+	"github.com/sonochiwa/avito-shop/api/rest/models"
 	"github.com/sonochiwa/avito-shop/internal/service"
 )
 
@@ -73,7 +73,7 @@ func (h Handler) authHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func responseError(w http.ResponseWriter, message string) {
-	response := rest.ErrorsResponse{
+	response := models.ErrorsResponse{
 		Errors: message,
 	}
 

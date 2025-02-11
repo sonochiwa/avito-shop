@@ -1,39 +1,39 @@
 package converter
 
 import (
-	"github.com/sonochiwa/avito-shop/api/rest"
+	"github.com/sonochiwa/avito-shop/api/rest/models"
 	"github.com/sonochiwa/avito-shop/internal/domain"
 )
 
-func ConvertGetInfoToResponse(info domain.GetInfo) rest.GetInfoHandlerResponse {
-	inventory := make([]rest.InventoryItem, len(info.Inventory))
+func ConvertGetInfoToResponse(info domain.GetInfo) models.GetInfoHandlerResponse {
+	inventory := make([]models.InventoryItem, len(info.Inventory))
 	for i, item := range info.Inventory {
-		inventory[i] = rest.InventoryItem{
+		inventory[i] = models.InventoryItem{
 			Type:     item.ProductTitle,
 			Quantity: item.Quantity,
 		}
 	}
 
-	coinHistory := rest.CoinHistory{
-		Received: make([]rest.ReceivedItem, len(info.Ledger.Received)),
-		Sent:     make([]rest.SentItem, len(info.Ledger.Sent)),
+	coinHistory := models.CoinHistory{
+		Received: make([]models.ReceivedItem, len(info.Ledger.Received)),
+		Sent:     make([]models.SentItem, len(info.Ledger.Sent)),
 	}
 
 	for i, received := range info.Ledger.Received {
-		coinHistory.Received[i] = rest.ReceivedItem{
+		coinHistory.Received[i] = models.ReceivedItem{
 			FromUser: received.FromUser,
 			Amount:   received.Amount,
 		}
 	}
 
 	for i, sent := range info.Ledger.Sent {
-		coinHistory.Sent[i] = rest.SentItem{
+		coinHistory.Sent[i] = models.SentItem{
 			ToUser: sent.ToUser,
 			Amount: sent.Amount,
 		}
 	}
 
-	return rest.GetInfoHandlerResponse{
+	return models.GetInfoHandlerResponse{
 		Coins:       info.Balance,
 		Inventory:   inventory,
 		CoinHistory: coinHistory,

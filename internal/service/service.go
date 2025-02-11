@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/sonochiwa/avito-shop/api/rest"
+	"github.com/sonochiwa/avito-shop/api/rest/models"
 	"github.com/sonochiwa/avito-shop/internal/converter"
 	"github.com/sonochiwa/avito-shop/internal/repository"
 )
@@ -18,10 +18,10 @@ func New(repo repository.Repository) Service {
 	}
 }
 
-func (s Service) GetInfo(ctx context.Context, userID int) (rest.GetInfoHandlerResponse, error) {
+func (s Service) GetInfo(ctx context.Context, userID int) (models.GetInfoHandlerResponse, error) {
 	data, err := s.repo.GetInfo(ctx, userID)
 	if err != nil {
-		return rest.GetInfoHandlerResponse{}, err
+		return models.GetInfoHandlerResponse{}, err
 	}
 
 	return converter.ConvertGetInfoToResponse(data), nil

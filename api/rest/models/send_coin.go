@@ -1,4 +1,4 @@
-package rest
+package models
 
 type SendCoinHandlerRequest struct {
 	ToUser string `json:"toUser"`

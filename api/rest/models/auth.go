@@ -1,4 +1,4 @@
-package rest
+package models
 
 type AuthHandlerRequest struct {
 	Username string `json:"username"`
