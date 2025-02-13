@@ -2,9 +2,11 @@ syntax = "proto3";
 
 package avito_shop;
 
-import "google/protobuf/empty.proto";
-
 option go_package = "api/grpc/gen;avito_shop";
+
+message InfoRequest {
+  // Запрос не содержит параметров
+}
 
 message InfoResponse {
   int64 coins = 1;
@@ -24,6 +26,6 @@ message ErrorResponse {
   int32 code = 2;
 }
 
-service Service {
-  rpc GetInfo(google.protobuf.Empty) returns (InfoResponse);
+service YourService {
+  rpc GetInfo(InfoRequest) returns (InfoResponse);
 }
